@@ -28,11 +28,14 @@ def bordaCount(candidate, voters, name):
             rank = int(input(f"Rank for {candidate}: "))
             ranks[candidate] = rank
         for candidate, rank in ranks.items():
-            votes[candidate] += (num_candidates - rank + 1)
-    sorted_results = sorted(votes.items(), key=lambda item: item[1], reverse=True)
-    print("\nFinal ranking:")
-    for rank, (name, score) in enumerate(sorted_results, start=1):
-        print(f"{rank}. {name} with {score} points")
+            if rank == num_candidates:
+                votes[candidate] += 0
+            else:
+                votes[candidate] += (num_candidates - rank)
+        sorted_results = sorted(votes.items(), key=lambda item: item[1], reverse=True)
+        print("\nFinal ranking:")
+        for rank, (name, score) in enumerate(sorted_results, start=1):
+            print(f"{rank}. {name} with {score} points")
 
 def plurality(candidates, voters, name):
     for i in range(voters):
